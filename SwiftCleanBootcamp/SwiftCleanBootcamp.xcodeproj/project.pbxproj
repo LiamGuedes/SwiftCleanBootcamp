@@ -12,7 +12,7 @@
 		F63D21CF2901F87000D9A9AC /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D21CE2901F86F00D9A9AC /* AccountModel.swift */; };
 		F63D21D92901F8FB00D9A9AC /* Data.docc in Sources */ = {isa = PBXBuildFile; fileRef = F63D21D82901F8FB00D9A9AC /* Data.docc */; };
 		F63D21DF2901F8FB00D9A9AC /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63D21D52901F8FA00D9A9AC /* Data.framework */; };
-		F63D21E42901F8FB00D9A9AC /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D21E32901F8FB00D9A9AC /* DataTests.swift */; };
+		F63D21E42901F8FB00D9A9AC /* RemoteAddAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D21E32901F8FB00D9A9AC /* RemoteAddAccountTests.swift */; };
 		F63D21E52901F8FB00D9A9AC /* Data.h in Headers */ = {isa = PBXBuildFile; fileRef = F63D21D72901F8FB00D9A9AC /* Data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F63D21ED2901F96C00D9A9AC /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63D21C32901F46C00D9A9AC /* Domain.framework */; };
 		F63D21EE2901F96C00D9A9AC /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F63D21C32901F46C00D9A9AC /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -58,7 +58,7 @@
 		F63D21D72901F8FB00D9A9AC /* Data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Data.h; sourceTree = "<group>"; };
 		F63D21D82901F8FB00D9A9AC /* Data.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Data.docc; sourceTree = "<group>"; };
 		F63D21DE2901F8FB00D9A9AC /* DataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F63D21E32901F8FB00D9A9AC /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
+		F63D21E32901F8FB00D9A9AC /* RemoteAddAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAddAccountTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +131,7 @@
 		F63D21E22901F8FB00D9A9AC /* DataTests */ = {
 			isa = PBXGroup;
 			children = (
-				F63D21E32901F8FB00D9A9AC /* DataTests.swift */,
+				F63D21E32901F8FB00D9A9AC /* RemoteAddAccountTests.swift */,
 			);
 			path = DataTests;
 			sourceTree = "<group>";
@@ -308,7 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F63D21E42901F8FB00D9A9AC /* DataTests.swift in Sources */,
+				F63D21E42901F8FB00D9A9AC /* RemoteAddAccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
