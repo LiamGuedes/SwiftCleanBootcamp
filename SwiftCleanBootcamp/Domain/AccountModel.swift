@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AccountModel {
+public struct AccountModel {
     var id: String
     var name: String
     var email: String
