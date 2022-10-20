@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		F63D21C72901F46C00D9A9AC /* Domain.docc in Sources */ = {isa = PBXBuildFile; fileRef = F63D21C62901F46C00D9A9AC /* Domain.docc */; };
+		F63D21CD2901F5A400D9A9AC /* AddAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D21CC2901F5A400D9A9AC /* AddAccount.swift */; };
+		F63D21CF2901F87000D9A9AC /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D21CE2901F86F00D9A9AC /* AccountModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F63D21C32901F46C00D9A9AC /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F63D21C62901F46C00D9A9AC /* Domain.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Domain.docc; sourceTree = "<group>"; };
+		F63D21CC2901F5A400D9A9AC /* AddAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccount.swift; sourceTree = "<group>"; };
+		F63D21CE2901F86F00D9A9AC /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,8 @@
 		F63D21C42901F46C00D9A9AC /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				F63D21CC2901F5A400D9A9AC /* AddAccount.swift */,
+				F63D21CE2901F86F00D9A9AC /* AccountModel.swift */,
 				F63D21C62901F46C00D9A9AC /* Domain.docc */,
 			);
 			path = Domain;
@@ -129,6 +135,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F63D21C72901F46C00D9A9AC /* Domain.docc in Sources */,
+				F63D21CF2901F87000D9A9AC /* AccountModel.swift in Sources */,
+				F63D21CD2901F5A400D9A9AC /* AddAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
