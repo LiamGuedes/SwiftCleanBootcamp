@@ -9,10 +9,12 @@ import Foundation
 
 class HttpClientSpy {
     var url: URL?
+    var data: Data?
 }
 
 extension HttpClientSpy: HttpPostClient {
-    func post(url: URL) {
+    func post(to url: URL, with data: Data?) {
         self.url = url
+        self.data = data
     }
 }

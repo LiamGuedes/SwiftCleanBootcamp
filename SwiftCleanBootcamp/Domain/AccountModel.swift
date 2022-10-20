@@ -8,8 +8,8 @@
 import Foundation
 
 public struct AccountModel {
-    var id: String
-    var name: String
-    var email: String
-    var password: String
+    public var id: String
+    public var name: String
+    public var email: String
+    public var password: String
 }
