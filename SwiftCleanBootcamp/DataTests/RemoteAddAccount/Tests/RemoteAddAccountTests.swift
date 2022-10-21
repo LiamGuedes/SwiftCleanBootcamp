@@ -32,7 +32,7 @@ final class RemoteAddAccountTests: XCTestCase {
         let url = URL(string: "https://www.google.com.br")!
         let httpClientSpy = HttpClientSpy()
         let sut = RemoteAddAccount(url: url, httpClient: httpClientSpy)
-        let addAccountModel = AddAccountModel(name: "any", email: "any@mail.com", password: "123", passwordConfirmation: "123")
+        let addAccountModel = self.makeAddAccountModel()
         
         sut.add(addAccountModel: addAccountModel)
         XCTAssertEqual(httpClientSpy.url, url)
@@ -42,10 +42,17 @@ final class RemoteAddAccountTests: XCTestCase {
         let url = URL(string: "https://www.google.com.br")!
         let httpClientSpy = HttpClientSpy()
         let sut = RemoteAddAccount(url: url, httpClient: httpClientSpy)
-        let addAccountModel = AddAccountModel(name: "any", email: "any@mail.com", password: "123", passwordConfirmation: "123")
-        let data = try? JSONEncoder().encode(addAccountModel)
+        let data = try? JSONEncoder().encode(self.makeAddAccountModel())
         
-        sut.add(addAccountModel: addAccountModel)
+        sut.add(addAccountModel: self.makeAddAccountModel())
         XCTAssertEqual(httpClientSpy.data, data)
+    }
+}
+
+extension RemoteAddAccountTests {
+    
+    /// Factory Pattern Example:  The Factory Method separates product construction code from the code that actually uses the product. Therefore it’s easier to extend the product construction code independently from the rest of the code.
+    func makeAddAccountModel() -> AddAccountModel {
+        return AddAccountModel(name: "any", email: "any@mail.com", password: "123", passwordConfirmation: "123")
     }
 }
