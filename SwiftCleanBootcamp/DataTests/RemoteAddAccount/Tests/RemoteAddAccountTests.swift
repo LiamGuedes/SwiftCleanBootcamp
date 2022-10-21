@@ -30,8 +30,7 @@ class RemoteAddAccount {
 final class RemoteAddAccountTests: XCTestCase {
     func test_add_should_call_httpClient_with_correct_url() {
         let url = URL(string: "https://www.google.com.br")!
-        let httpClientSpy = HttpClientSpy()
-        let sut = RemoteAddAccount(url: url, httpClient: httpClientSpy)
+        let (sut, httpClientSpy)  = self.makeSut(url: url)
         let addAccountModel = self.makeAddAccountModel()
         
         sut.add(addAccountModel: addAccountModel)
@@ -39,9 +38,7 @@ final class RemoteAddAccountTests: XCTestCase {
     }
     
     func test_add_should_call_httpClient_with_correct_data() {
-        let url = URL(string: "https://www.google.com.br")!
-        let httpClientSpy = HttpClientSpy()
-        let sut = RemoteAddAccount(url: url, httpClient: httpClientSpy)
+        let (sut, httpClientSpy)  = self.makeSut()
         let data = try? JSONEncoder().encode(self.makeAddAccountModel())
         
         sut.add(addAccountModel: self.makeAddAccountModel())
@@ -51,7 +48,14 @@ final class RemoteAddAccountTests: XCTestCase {
 
 extension RemoteAddAccountTests {
     
+    // MARK: Factory Pattern
     /// Factory Pattern Example:  The Factory Method separates product construction code from the code that actually uses the product. Therefore it’s easier to extend the product construction code independently from the rest of the code.
+    func makeSut(url: URL = URL(string: "https://www.google.com.br")!) -> (sut: RemoteAddAccount, httpClientSpy: HttpClientSpy) {
+        let httpClientSpy = HttpClientSpy()
+        let sut = RemoteAddAccount(url: url, httpClient: httpClientSpy)
+        return (sut, httpClientSpy)
+    }
+    
     func makeAddAccountModel() -> AddAccountModel {
         return AddAccountModel(name: "any", email: "any@mail.com", password: "123", passwordConfirmation: "123")
     }
