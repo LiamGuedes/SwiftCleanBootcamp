@@ -30,10 +30,14 @@ final class RemoteAddAccountTests: XCTestCase {
         let (sut, httpClientSpy)  = self.makeSut()
         let exp = expectation(description: "waiting")
         
-        sut.add(addAccountModel: self.makeAddAccountModel()) { error in
-            XCTAssertEqual(error, .unexpected)
+        sut.add(addAccountModel: self.makeAddAccountModel()) { result in
+            switch result {
+                case .failure(let error): XCTAssertEqual(error, .unexpected)
+                case .success(_): XCTFail("Expected error, but receive \(result) instead")
+            }
             exp.fulfill()
         }
+        
         httpClientSpy.completeWithError(.noConnectivity)
         wait(for: [exp], timeout: 1)
     }
