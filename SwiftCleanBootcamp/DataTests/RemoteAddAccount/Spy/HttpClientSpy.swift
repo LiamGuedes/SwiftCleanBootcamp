@@ -9,13 +9,14 @@ import Foundation
 @testable import Data
 
 class HttpClientSpy {
-    var url: URL?
+    var url = [URL]()
     var data: Data?
+    var callsCount = 0
 }
 
 extension HttpClientSpy: HttpPostClient {
     func post(to url: URL, with data: Data?) {
-        self.url = url
+        self.url.append(url)
         self.data = data
     }
 }

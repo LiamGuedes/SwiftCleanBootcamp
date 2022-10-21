@@ -16,7 +16,7 @@ final class RemoteAddAccountTests: XCTestCase {
         let addAccountModel = self.makeAddAccountModel()
         
         sut.add(addAccountModel: addAccountModel)
-        XCTAssertEqual(httpClientSpy.url, url)
+        XCTAssertEqual(httpClientSpy.url, [url])
     }
     
     func test_add_should_call_httpClient_with_correct_data() {
