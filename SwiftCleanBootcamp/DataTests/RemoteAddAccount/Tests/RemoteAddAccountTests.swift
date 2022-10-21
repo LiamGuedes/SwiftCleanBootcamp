@@ -15,15 +15,27 @@ final class RemoteAddAccountTests: XCTestCase {
         let (sut, httpClientSpy)  = self.makeSut(url: url)
         let addAccountModel = self.makeAddAccountModel()
         
-        sut.add(addAccountModel: addAccountModel)
+        sut.add(addAccountModel: addAccountModel) { _ in }
         XCTAssertEqual(httpClientSpy.url, [url])
     }
     
     func test_add_should_call_httpClient_with_correct_data() {
         let (sut, httpClientSpy)  = self.makeSut()
         
-        sut.add(addAccountModel: self.makeAddAccountModel())
+        sut.add(addAccountModel: self.makeAddAccountModel()) { _ in }
         XCTAssertEqual(httpClientSpy.data, self.makeAddAccountModel().toData())
+    }
+    
+    func test_add_should_call_httpClient_with_error_if_client_fails() {
+        let (sut, httpClientSpy)  = self.makeSut()
+        let exp = expectation(description: "waiting")
+        
+        sut.add(addAccountModel: self.makeAddAccountModel()) { error in
+            XCTAssertEqual(error, .unexpected)
+            exp.fulfill()
+        }
+        httpClientSpy.completeWithError(.noConnectivity)
+        wait(for: [exp], timeout: 1)
     }
 }
 
