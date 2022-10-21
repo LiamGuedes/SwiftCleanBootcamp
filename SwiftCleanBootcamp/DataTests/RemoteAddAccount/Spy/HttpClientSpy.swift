@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import Data
 
 class HttpClientSpy {
     var url: URL?
