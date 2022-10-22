@@ -21,6 +21,7 @@
 		F63D21FD29021E1800D9A9AC /* HttpPostClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D21FC29021E1800D9A9AC /* HttpPostClient.swift */; };
 		F63D220329035A9800D9A9AC /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D220229035A9800D9A9AC /* DomainError.swift */; };
 		F63D220529035D9900D9A9AC /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D220429035D9900D9A9AC /* HttpError.swift */; };
+		F6A503F42904A2080070DCA8 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A503F32904A2080070DCA8 /* DataExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		F63D21FC29021E1800D9A9AC /* HttpPostClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpPostClient.swift; sourceTree = "<group>"; };
 		F63D220229035A9800D9A9AC /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		F63D220429035D9900D9A9AC /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
+		F6A503F32904A2080070DCA8 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		F63D21D62901F8FA00D9A9AC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				F6A503F22904A1E30070DCA8 /* Helpers */,
 				F63D21FE29021FF300D9A9AC /* UseCases */,
 				F63D21FB29021E0700D9A9AC /* HTTPMethods */,
 				F63D21D82901F8FB00D9A9AC /* Data.docc */,
@@ -220,6 +223,14 @@
 				F63D220229035A9800D9A9AC /* DomainError.swift */,
 			);
 			path = Errors;
+			sourceTree = "<group>";
+		};
+		F6A503F22904A1E30070DCA8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F6A503F32904A2080070DCA8 /* DataExtensions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,6 +394,7 @@
 				F63D220529035D9900D9A9AC /* HttpError.swift in Sources */,
 				F63D21D92901F8FB00D9A9AC /* Data.docc in Sources */,
 				F63D21FD29021E1800D9A9AC /* HttpPostClient.swift in Sources */,
+				F6A503F42904A2080070DCA8 /* DataExtensions.swift in Sources */,
 				F63D21FA29021DBC00D9A9AC /* RemoteAddAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

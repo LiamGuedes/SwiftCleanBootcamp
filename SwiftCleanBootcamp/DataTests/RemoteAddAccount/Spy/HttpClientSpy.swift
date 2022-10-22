@@ -24,4 +24,8 @@ extension HttpClientSpy: HttpPostClient {
     func completeWithError(_ error: HttpError) {
         completion?(.failure(error))
     }
+    
+    func completeWithData(_ data: Data) {
+        completion?(.success(data))
+    }
 }
