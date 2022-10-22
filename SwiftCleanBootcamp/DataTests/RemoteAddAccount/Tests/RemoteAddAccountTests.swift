@@ -58,6 +58,22 @@ final class RemoteAddAccountTests: XCTestCase {
         httpClientSpy.completeWithData(expectedAccount.toData()!)
         wait(for: [exp], timeout: 1)
     }
+    
+    func test_add_should_call_httpClient_with_error_if_client_completes_with_invalid_data() {
+        let (sut, httpClientSpy)  = self.makeSut()
+        let exp = expectation(description: "waiting")
+        
+        sut.add(addAccountModel: self.makeAddAccountModel()) { result in
+            switch result {
+                case .failure(let error): XCTAssertEqual(error, .invalidData)
+                case .success(_): XCTFail("Expected error, but receive \(result) instead")
+            }
+            exp.fulfill()
+        }
+        
+        httpClientSpy.completeWithData(Data("invalid_data".utf8))
+        wait(for: [exp], timeout: 1)
+    }
 }
 
 extension RemoteAddAccountTests {
