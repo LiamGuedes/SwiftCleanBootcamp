@@ -11,7 +11,7 @@ import Domain
 
 final class RemoteAddAccountTests: XCTestCase {
     func test_add_should_call_httpClient_with_correct_url() {
-        let url = URL(string: "https://www.google.com.br")!
+        let url = self.makeURL()
         let (sut, httpClientSpy)  = self.makeSut(url: url)
         let addAccountModel = self.makeAddAccountModel()
         
@@ -28,51 +28,26 @@ final class RemoteAddAccountTests: XCTestCase {
     
     func test_add_should_call_httpClient_with_error_if_client_fails() {
         let (sut, httpClientSpy)  = self.makeSut()
-        let exp = expectation(description: "waiting")
-        
-        sut.add(addAccountModel: self.makeAddAccountModel()) { result in
-            switch result {
-                case .failure(let error): XCTAssertEqual(error, .unexpected)
-                case .success(_): XCTFail("Expected error, but receive \(result) instead")
-            }
-            exp.fulfill()
-        }
-        
-        httpClientSpy.completeWithError(.noConnectivity)
-        wait(for: [exp], timeout: 1)
+        expect(sut, completeWith: .failure(.unexpected), when: {
+            httpClientSpy.completeWithError(.noConnectivity)
+        })
     }
     
     func test_add_should_call_httpClient_with_data_if_client_complete_with_data() {
         let (sut, httpClientSpy)  = self.makeSut()
-        let exp = expectation(description: "waiting")
         let expectedAccount = self.makeAccountModel()
-        
-        sut.add(addAccountModel: self.makeAddAccountModel()) { result in
-            switch result {
-                case .failure(let error): XCTFail("Expected success data, but receive \(error) instead")
-                case .success(let receivedAccount): XCTAssertEqual(receivedAccount, expectedAccount)
-            }
-            exp.fulfill()
-        }
-        
-        httpClientSpy.completeWithData(expectedAccount.toData()!)
-        wait(for: [exp], timeout: 1)
+
+        self.expect(sut, completeWith: .success(expectedAccount), when: {
+            httpClientSpy.completeWithData(expectedAccount.toData()!)
+        })
     }
     
     func test_add_should_call_httpClient_with_error_if_client_completes_with_invalid_data() {
         let (sut, httpClientSpy)  = self.makeSut()
-        let exp = expectation(description: "waiting")
         
-        sut.add(addAccountModel: self.makeAddAccountModel()) { result in
-            switch result {
-                case .failure(let error): XCTAssertEqual(error, .invalidData)
-                case .success(_): XCTFail("Expected error, but receive \(result) instead")
-            }
-            exp.fulfill()
-        }
-        
-        httpClientSpy.completeWithData(Data("invalid_data".utf8))
-        wait(for: [exp], timeout: 1)
+        expect(sut, completeWith: .failure(.invalidData), when: {
+            httpClientSpy.completeWithData(self.makeInvalidData())
+        })
     }
 }
 
@@ -86,11 +61,35 @@ extension RemoteAddAccountTests {
         return (sut, httpClientSpy)
     }
     
+    func expect(_ sut: RemoteAddAccount, completeWith expectedResult: Result<AccountModel, DomainError>, when action:() -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "waiting")
+        
+        sut.add(addAccountModel: self.makeAddAccountModel()) { receivedResult in
+            switch (receivedResult, expectedResult) {
+                case (.failure(let expectedError), .failure(let receivedError)): XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+                case (.success(let expectedData), .success(let receivedData)): XCTAssertEqual(receivedData, expectedData, file: file, line: line)
+            default: XCTFail("Expected \(expectedResult), but receive \(receivedResult) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        
+        action()
+        wait(for: [exp], timeout: 1)
+    }
+    
     func makeAddAccountModel() -> AddAccountModel {
         return AddAccountModel(name: "any", email: "any@mail.com", password: "123", passwordConfirmation: "123")
     }
     
     func makeAccountModel() -> AccountModel {
         return AccountModel(id: "id_123" , name: "any", email: "any@mail.com", password: "123")
+    }
+    
+    func makeInvalidData() -> Data {
+        return Data("invalid_data".utf8)
+    }
+    
+    func makeURL() -> URL {
+        return URL(string: "https://www.google.com.br")!
     }
 }
