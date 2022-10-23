@@ -53,21 +53,27 @@ final class RemoteAddAccountTests: XCTestCase {
 
 extension RemoteAddAccountTests {
     
-    // MARK: Factory Pattern
+    // TIP: Factory Pattern
     /// Factory Pattern Example:  The Factory Method separates product construction code from the code that actually uses the product. Therefore it’s easier to extend the product construction code independently from the rest of the code.
-    func makeSut(url: URL = URL(string: "https://www.google.com.br")!) -> (sut: RemoteAddAccount, httpClientSpy: HttpClientSpy) {
+    func makeSut(url: URL = URL(string: "https://www.google.com.br")!, file: StaticString = #filePath, line: UInt = #line) -> (sut: RemoteAddAccount, httpClientSpy: HttpClientSpy) {
         let httpClientSpy = HttpClientSpy()
         let sut = RemoteAddAccount(url: url, httpClient: httpClientSpy)
+        
+        self.checkMemoryLeak(for: sut, file: file, line: line)
+        self.checkMemoryLeak(for: httpClientSpy, file: file, line: line)
+        
         return (sut, httpClientSpy)
     }
     
+    // TIP: Return the test Fails Answer
+    /// Use "file: StaticString = #filePath, line: UInt = #line", when you have helpers that ensures XCTAssert. It will provides the answer in line o helper caller.
     func expect(_ sut: RemoteAddAccount, completeWith expectedResult: Result<AccountModel, DomainError>, when action:() -> Void, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "waiting")
         
         sut.add(addAccountModel: self.makeAddAccountModel()) { receivedResult in
             switch (receivedResult, expectedResult) {
-                case (.failure(let expectedError), .failure(let receivedError)): XCTAssertEqual(receivedError, expectedError, file: file, line: line)
-                case (.success(let expectedData), .success(let receivedData)): XCTAssertEqual(receivedData, expectedData, file: file, line: line)
+            case (.failure(let expectedError), .failure(let receivedError)): XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            case (.success(let expectedData), .success(let receivedData)): XCTAssertEqual(receivedData, expectedData, file: file, line: line)
             default: XCTFail("Expected \(expectedResult), but receive \(receivedResult) instead", file: file, line: line)
             }
             exp.fulfill()
@@ -91,5 +97,13 @@ extension RemoteAddAccountTests {
     
     func makeURL() -> URL {
         return URL(string: "https://www.google.com.br")!
+    }
+    
+    // TIP: Memory Leak
+    /// It's import to have a test for memory leak, once it prevents the code isn't overload. If you have this problem, make that leak weak. For example: [weak self] or weak let variableName.
+    func checkMemoryLeak(for instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, file: file, line: line)
+        }
     }
 }
