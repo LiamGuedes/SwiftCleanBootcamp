@@ -22,6 +22,9 @@
 		F63D220329035A9800D9A9AC /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D220229035A9800D9A9AC /* DomainError.swift */; };
 		F63D220529035D9900D9A9AC /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63D220429035D9900D9A9AC /* HttpError.swift */; };
 		F6A503F42904A2080070DCA8 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A503F32904A2080070DCA8 /* DataExtensions.swift */; };
+		F6A503F72904D84D0070DCA8 /* XCTTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A503F62904D84D0070DCA8 /* XCTTestCaseExtension.swift */; };
+		F6A503F92904D9270070DCA8 /* Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A503F82904D9270070DCA8 /* Factories.swift */; };
+		F6A503FB2904D9E90070DCA8 /* AccountModelSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A503FA2904D9E90070DCA8 /* AccountModelSeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,9 @@
 		F63D220229035A9800D9A9AC /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		F63D220429035D9900D9A9AC /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		F6A503F32904A2080070DCA8 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
+		F6A503F62904D84D0070DCA8 /* XCTTestCaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTTestCaseExtension.swift; sourceTree = "<group>"; };
+		F6A503F82904D9270070DCA8 /* Factories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factories.swift; sourceTree = "<group>"; };
+		F6A503FA2904D9E90070DCA8 /* AccountModelSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModelSeed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,7 @@
 		F63D21E22901F8FB00D9A9AC /* DataTests */ = {
 			isa = PBXGroup;
 			children = (
+				F6A503F52904D82D0070DCA8 /* Helpers */,
 				F63D21F22902045A00D9A9AC /* RemoteAddAccount */,
 			);
 			path = DataTests;
@@ -231,6 +238,32 @@
 				F6A503F32904A2080070DCA8 /* DataExtensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F6A503F52904D82D0070DCA8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F6A503FD2904DA080070DCA8 /* Extensions */,
+				F6A503FC2904D9EF0070DCA8 /* GenericSeeds */,
+				F6A503F82904D9270070DCA8 /* Factories.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F6A503FC2904D9EF0070DCA8 /* GenericSeeds */ = {
+			isa = PBXGroup;
+			children = (
+				F6A503FA2904D9E90070DCA8 /* AccountModelSeed.swift */,
+			);
+			path = GenericSeeds;
+			sourceTree = "<group>";
+		};
+		F6A503FD2904DA080070DCA8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F6A503F62904D84D0070DCA8 /* XCTTestCaseExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,7 +436,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6A503FB2904D9E90070DCA8 /* AccountModelSeed.swift in Sources */,
+				F6A503F72904D84D0070DCA8 /* XCTTestCaseExtension.swift in Sources */,
 				F63D21E42901F8FB00D9A9AC /* RemoteAddAccountTests.swift in Sources */,
+				F6A503F92904D9270070DCA8 /* Factories.swift in Sources */,
 				F63D21F62902049E00D9A9AC /* HttpClientSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

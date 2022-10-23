@@ -11,7 +11,7 @@ import Domain
 
 final class RemoteAddAccountTests: XCTestCase {
     func test_add_should_call_httpClient_with_correct_url() {
-        let url = self.makeURL()
+        let url = makeURL()
         let (sut, httpClientSpy)  = self.makeSut(url: url)
         let addAccountModel = self.makeAddAccountModel()
         
@@ -35,7 +35,7 @@ final class RemoteAddAccountTests: XCTestCase {
     
     func test_add_should_call_httpClient_with_data_if_client_complete_with_data() {
         let (sut, httpClientSpy)  = self.makeSut()
-        let expectedAccount = self.makeAccountModel()
+        let expectedAccount = makeAccountModel()
 
         self.expect(sut, completeWith: .success(expectedAccount), when: {
             httpClientSpy.completeWithData(expectedAccount.toData()!)
@@ -46,7 +46,7 @@ final class RemoteAddAccountTests: XCTestCase {
         let (sut, httpClientSpy)  = self.makeSut()
         
         expect(sut, completeWith: .failure(.invalidData), when: {
-            httpClientSpy.completeWithData(self.makeInvalidData())
+            httpClientSpy.completeWithData(makeInvalidData())
         })
     }
     
@@ -97,25 +97,5 @@ extension RemoteAddAccountTests {
     
     func makeAddAccountModel() -> AddAccountModel {
         return AddAccountModel(name: "any", email: "any@mail.com", password: "123", passwordConfirmation: "123")
-    }
-    
-    func makeAccountModel() -> AccountModel {
-        return AccountModel(id: "id_123" , name: "any", email: "any@mail.com", password: "123")
-    }
-    
-    func makeInvalidData() -> Data {
-        return Data("invalid_data".utf8)
-    }
-    
-    func makeURL() -> URL {
-        return URL(string: "https://www.google.com.br")!
-    }
-    
-    // TIP: Memory Leak
-    /// It's import to have a test for memory leak, once it prevents the code isn't overload. If you have this problem, make that leak weak. For example: [weak self] or weak let variableName.
-    func checkMemoryLeak(for instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
-        addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance, file: file, line: line)
-        }
     }
 }
