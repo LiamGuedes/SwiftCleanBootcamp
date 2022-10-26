@@ -18,3 +18,7 @@ func makeValidData() -> Data {
 func makeURL() -> URL {
     return URL(string: "https://www.google.com.br")!
 }
+
+func makeError() -> Error {
+    return NSError(domain: "Unexpected Error", code: 123)
+}

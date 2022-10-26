@@ -18,8 +18,13 @@ class AlamofireAdapter {
         self.session = session
     }
     
-    func post(to url: URL, with data: Data?) {
-        session.request(url, method: .post, parameters: data?.toJson(), encoding: JSONEncoding.default).resume()
+    func post(to url: URL, with data: Data?, completion: @escaping (Result<Data, HttpError>) -> Void) {
+        session.request(url, method: .post, parameters: data?.toJson(), encoding: JSONEncoding.default).responseData { dataResponse in
+            switch dataResponse.result {
+            case .success: break
+            case .failure: completion(.failure(.noConnectivity))
+            }
+        }
     }
 }
 
@@ -39,6 +44,21 @@ class AlamofireAdapterTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
         }
     }
+    
+    func test_post_should_complete_with_error_when_request_completes_with_error() {
+        let sut = makeSut()
+        URLProtocolStub.simulate(data: nil, response: nil, error: makeError())
+        let exp = expectation(description: "waiting")
+        sut.post(to: makeURL(), with: makeValidData()) { result in
+            switch result {
+            case .failure(let error): XCTAssertEqual(error, .noConnectivity)
+            case .success: XCTFail("Expected error, but got \(result) instead")
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1)
+    }
 }
 
 extension AlamofireAdapterTests {
@@ -57,7 +77,7 @@ extension AlamofireAdapterTests {
         let sut = self.makeSut()
         let url = url
         
-        sut.post(to: url, with: data)
+        sut.post(to: url, with: data) { _ in }
         
         let exp = expectation(description: "waiting")
         URLProtocolStub.requestObserver { request in
@@ -75,12 +95,21 @@ class URLProtocolStub: URLProtocol {
     /// no nosso caso, para fazer os testes do Alamofire, utilizaremos URLRequest. Detalhe, voce pode chamar de qualquer nome, entretanto o Design Pattern
     /// Observable, nos recomenda colocar o nome como "emit"
     static var emit: ((URLRequest) -> Void)?
+    static var data: Data?
+    static var response: HTTPURLResponse?
+    static var error: Error?
     
     /// Com a variavel criada corretamente, nos devemos implementar uma funcao que retorne um handler, que sera chamado na parte do codigo que voce quiser.
     /// Alem disso voce devera passar o completion recebido para o emit, para que assim voce consiga executar a funcao sempre que ouver uma determinado
     /// requisicao a ela.
     static func requestObserver(completion: @escaping (URLRequest) -> Void) {
         URLProtocolStub.emit = completion
+    }
+    
+    static func simulate(data: Data?, response: HTTPURLResponse?, error: Error?) {
+        URLProtocolStub.data = data
+        URLProtocolStub.response = response
+        URLProtocolStub.error = error
     }
     
     // canInit: ira fazer com que todas as nossas URL dentro daquela session sejam interceptadas, nao importa para onde aquela URL leve.
@@ -95,6 +124,21 @@ class URLProtocolStub: URLProtocol {
     // startLoading(): Aqui nos iremos fazer os testes, para o caso de o Alamofire responder postivamente ou negativamente.
     override func startLoading() {
         URLProtocolStub.emit?(request)
+        
+        if let data = URLProtocolStub.data {
+            client?.urlProtocol(self, didLoad: data)
+        }
+        
+        if let response = URLProtocolStub.response {
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        }
+        
+        if let error = URLProtocolStub.error {
+            client?.urlProtocol(self, didFailWithError: error)
+        }
+        
+        // Sempre que fizermos testes de interceptacao, devemos completar o request atraves da funcao abaixo:
+        client?.urlProtocolDidFinishLoading(self)
     }
     
     override func stopLoading() { }
