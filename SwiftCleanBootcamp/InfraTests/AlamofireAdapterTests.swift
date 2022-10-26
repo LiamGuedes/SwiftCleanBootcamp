@@ -25,49 +25,47 @@ class AlamofireAdapter {
 
 class AlamofireAdapterTests: XCTestCase {
     func test_post_should_make_request_with_valid_url_and_method() {
-        let configuration = URLSessionConfiguration.default
-        configuration.protocolClasses = [URLProtocolStub.self]
-        
-        let session = Session(configuration: configuration)
-        let sut = AlamofireAdapter(session: session)
-
         let url = makeURL()
         
-        sut.post(to: url, with: makeValidData())
-        
-        let exp = expectation(description: "waiting")
-        URLProtocolStub.requestObserver { request in
+        self.testRequestFor(url: url, data: makeValidData()) { request in
             XCTAssertEqual(url, request.url)
             XCTAssertEqual("POST", request.httpMethod)
             XCTAssertNotNil(request.httpBodyStream)
-            exp.fulfill()
         }
-        
-        wait(for: [exp], timeout: 1)
     }
     
     func test_post_should_make_request_with_no_data() {
+        self.testRequestFor(data: nil) { request in
+            XCTAssertNil(request.httpBodyStream)
+        }
+    }
+}
+
+extension AlamofireAdapterTests {
+    func makeSut () -> AlamofireAdapter {
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [URLProtocolStub.self]
         
         let session = Session(configuration: configuration)
-        let sut = AlamofireAdapter(session: session)
-
-        let url = makeURL()
+        return AlamofireAdapter(session: session)
+    }
+    
+    func testRequestFor(url: URL = makeURL(), data: Data?, action: @escaping (URLRequest) -> Void) {
+        let sut = self.makeSut()
+        let url = url
         
-        sut.post(to: url, with: nil)
+        sut.post(to: url, with: data)
         
         let exp = expectation(description: "waiting")
         URLProtocolStub.requestObserver { request in
-            XCTAssertEqual(url, request.url)
-            XCTAssertEqual("POST", request.httpMethod)
-            XCTAssertNil(request.httpBodyStream)
+            action(request)
             exp.fulfill()
         }
         
         wait(for: [exp], timeout: 1)
     }
 }
+
 
 class URLProtocolStub: URLProtocol {
     /// Para adicionar um observable corretamente, primeiramente iremos adicionar uma variavel estatica que ira recever uma funcao do tipo que voce definir,
