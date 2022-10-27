@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F6200915290A1A7200C44482 /* AlamofireAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6200914290A1A7200C44482 /* AlamofireAdapter.swift */; };
 		F6242A48290619D3006BC7C3 /* Infra.docc in Sources */ = {isa = PBXBuildFile; fileRef = F6242A47290619D3006BC7C3 /* Infra.docc */; };
 		F6242A4E290619D3006BC7C3 /* Infra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6242A44290619D3006BC7C3 /* Infra.framework */; };
 		F6242A5C290619FD006BC7C3 /* AlamofireAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6242A5B290619FD006BC7C3 /* AlamofireAdapterTests.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F6200914290A1A7200C44482 /* AlamofireAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireAdapter.swift; sourceTree = "<group>"; };
 		F6242A44290619D3006BC7C3 /* Infra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Infra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6242A47290619D3006BC7C3 /* Infra.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Infra.docc; sourceTree = "<group>"; };
 		F6242A4D290619D3006BC7C3 /* InfraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,9 +162,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F6200913290A1A5A00C44482 /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				F6200914290A1A7200C44482 /* AlamofireAdapter.swift */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
 		F6242A45290619D3006BC7C3 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
+				F6200913290A1A5A00C44482 /* Http */,
 				F6242A47290619D3006BC7C3 /* Infra.docc */,
 			);
 			path = Infra;
@@ -559,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6200915290A1A7200C44482 /* AlamofireAdapter.swift in Sources */,
 				F6242A48290619D3006BC7C3 /* Infra.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +708,7 @@
 		F6242A57290619D3006BC7C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -712,6 +725,7 @@
 		F6242A58290619D3006BC7C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
