@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F63D21D42901F8FA00D9A9AC"
-               BuildableName = "Data.framework"
-               BlueprintName = "Data"
+               BlueprintIdentifier = "F6242A43290619D3006BC7C3"
+               BuildableName = "Infra.framework"
+               BlueprintName = "Infra"
                ReferencedContainer = "container:SwiftCleanBootcamp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,8 +27,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      enableThreadSanitizer = "YES"
-      codeCoverageEnabled = "YES">
+      enableThreadSanitizer = "YES">
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -36,9 +35,9 @@
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F63D21DD2901F8FB00D9A9AC"
-               BuildableName = "DataTests.xctest"
-               BlueprintName = "DataTests"
+               BlueprintIdentifier = "F6242A4C290619D3006BC7C3"
+               BuildableName = "InfraTests.xctest"
+               BlueprintName = "InfraTests"
                ReferencedContainer = "container:SwiftCleanBootcamp.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -64,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F63D21D42901F8FA00D9A9AC"
-            BuildableName = "Data.framework"
-            BlueprintName = "Data"
+            BlueprintIdentifier = "F6242A43290619D3006BC7C3"
+            BuildableName = "Infra.framework"
+            BlueprintName = "Infra"
             ReferencedContainer = "container:SwiftCleanBootcamp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
