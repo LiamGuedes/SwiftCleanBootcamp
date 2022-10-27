@@ -15,6 +15,10 @@ func makeValidData() -> Data {
     return Data("{\"name\":\"Willian\"}".utf8)
 }
 
+func makeEmptyData() -> Data {
+    return Data()
+}
+
 func makeURL() -> URL {
     return URL(string: "https://www.google.com.br")!
 }

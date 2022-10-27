@@ -10,4 +10,8 @@ import Foundation
 public enum HttpError: Error {
     case unexpected
     case noConnectivity
+    case badRequest
+    case serverError
+    case unathorized
+    case forbidden
 }
