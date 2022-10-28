@@ -16,13 +16,23 @@ class SignupPresenter {
     }
     
     func signup(viewmodel: SignupViewModel) {
-        if viewmodel.name == nil || viewmodel.name!.isEmpty {
-            alertView.showMessage(viewmodel: AlertViewModel(title: "Falha na Validacao", message: "O campo nome e obrigatorio"))
-        } else if viewmodel.email == nil || viewmodel.email!.isEmpty {
-            alertView.showMessage(viewmodel: AlertViewModel(title: "Falha na Validacao", message: "O campo email e obrigatorio"))
-        } else if viewmodel.password == nil || viewmodel.password!.isEmpty {
-            alertView.showMessage(viewmodel: AlertViewModel(title: "Falha na Validacao", message: "O campo password e obrigatorio"))
+        if let message = validateData(viewmodel: viewmodel) {
+            alertView.showMessage(viewmodel: AlertViewModel(title: "Falha na Validacao", message:message))
         }
+    }
+    
+    private func validateData(viewmodel: SignupViewModel) -> String? {
+        if viewmodel.name == nil || viewmodel.name!.isEmpty {
+            return "O campo nome e obrigatorio"
+        } else if viewmodel.email == nil || viewmodel.email!.isEmpty {
+            return "O campo email e obrigatorio"
+        } else if viewmodel.password == nil || viewmodel.password!.isEmpty {
+            return "O campo password e obrigatorio"
+        } else if viewmodel.passwordConfirmation == nil || viewmodel.passwordConfirmation!.isEmpty {
+            return "O campo confirmar senha e obrigatorio"
+        }
+        
+        return nil
     }
 }
 
@@ -65,6 +75,14 @@ final class SignupPresenterTests: XCTestCase {
         
         sut.signup(viewmodel: signupViewModel)
         XCTAssertEqual(alertViewSpy.viewModel, AlertViewModel(title: "Falha na Validacao", message: "O campo password e obrigatorio"))
+    }
+    
+    func test_signup_should_show_error_if_password_confirmation_is_not_provided() {
+        let (alertViewSpy, sut) = makeSut()
+        let signupViewModel = SignupViewModel(name: "willian", email: "any@gmail.com", password: "123")
+        
+        sut.signup(viewmodel: signupViewModel)
+        XCTAssertEqual(alertViewSpy.viewModel, AlertViewModel(title: "Falha na Validacao", message: "O campo confirmar senha e obrigatorio"))
     }
 }
 
