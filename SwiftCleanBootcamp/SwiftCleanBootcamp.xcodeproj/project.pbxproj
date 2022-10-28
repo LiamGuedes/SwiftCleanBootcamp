@@ -38,6 +38,7 @@
 		F6419548290C289B00E6BCE2 /* SignupPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6419547290C289B00E6BCE2 /* SignupPresenterTests.swift */; };
 		F6419551290C5D3300E6BCE2 /* SignupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6419550290C5D3300E6BCE2 /* SignupPresenter.swift */; };
 		F6419556290C5F5600E6BCE2 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6419555290C5F5600E6BCE2 /* AlertView.swift */; };
+		F6419559290C790B00E6BCE2 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6419558290C790B00E6BCE2 /* EmailValidator.swift */; };
 		F6A503F42904A2080070DCA8 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A503F32904A2080070DCA8 /* DataExtensions.swift */; };
 		F6A503F72904D84D0070DCA8 /* XCTTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A503F62904D84D0070DCA8 /* XCTTestCaseExtension.swift */; };
 		F6A503F92904D9270070DCA8 /* Factories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A503F82904D9270070DCA8 /* Factories.swift */; };
@@ -164,6 +165,7 @@
 		F6419547290C289B00E6BCE2 /* SignupPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenterTests.swift; sourceTree = "<group>"; };
 		F6419550290C5D3300E6BCE2 /* SignupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
 		F6419555290C5F5600E6BCE2 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		F6419558290C790B00E6BCE2 /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		F6A503F32904A2080070DCA8 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		F6A503F62904D84D0070DCA8 /* XCTTestCaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTTestCaseExtension.swift; sourceTree = "<group>"; };
 		F6A503F82904D9270070DCA8 /* Factories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factories.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 		F641953A290C289B00E6BCE2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				F6419557290C790000E6BCE2 /* Helper */,
 				F6419554290C5F4A00E6BCE2 /* Views */,
 				F6419550290C5D3300E6BCE2 /* SignupPresenter.swift */,
 				F641953C290C289B00E6BCE2 /* Presentation.docc */,
@@ -447,6 +450,14 @@
 				F6419555290C5F5600E6BCE2 /* AlertView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F6419557290C790000E6BCE2 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F6419558290C790B00E6BCE2 /* EmailValidator.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		F6A503F22904A1E30070DCA8 /* Helpers */ = {
@@ -864,6 +875,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6419551290C5D3300E6BCE2 /* SignupPresenter.swift in Sources */,
+				F6419559290C790B00E6BCE2 /* EmailValidator.swift in Sources */,
 				F641953D290C289B00E6BCE2 /* Presentation.docc in Sources */,
 				F6419556290C5F5600E6BCE2 /* AlertView.swift in Sources */,
 			);
